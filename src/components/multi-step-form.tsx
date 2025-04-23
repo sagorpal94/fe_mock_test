@@ -230,7 +230,7 @@ const MultiStepForm = () => {
                 </CardContent>
             </Card>
 
-            <div className="mt-5 ">
+            <div className="py-5 ">
                 <UserList UserData={submittedData} setUserData={setSubmittedData}/>
             </div>
 
