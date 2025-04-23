@@ -1,16 +1,16 @@
 import {ThemeToggle} from "./theme-toggle.tsx";
 import {Codesandbox} from "lucide-react";
-// import SettingButton from "./SettingButton.tsx";
-// import {useState} from "react";
-// import SettingsPanel from "./SettingsPanel.tsx";
+import SettingButton from "./SettingButton.tsx";
+import {useState} from "react";
+import SettingsPanel from "./SettingsPanel.tsx";
 
 
 const Navbar = () => {
-    // const [isSettingsPanelOpen, setIsSettingsPanelOpen] = useState(false);
+    const [isSettingsPanelOpen, setIsSettingsPanelOpen] = useState(false);
     return (
         <>
             <header
-                className="h-14 flex items-center fixed w-full top-0 left-0 z-[99999]  border-b-input border-b border-solid bg-background shrink-0 items-center gap-2 px-4"
+                className="h-14 flex items-center fixed w-full top-0 left-0 z-20  border-b-input border-b border-solid bg-background shrink-0 items-center gap-2 px-4"
             >
 
                 <div className="sm:w-[250px] sm:me-16 h-[33px]">
@@ -28,11 +28,11 @@ const Navbar = () => {
                 <div className="ml-auto px-3">
                     <div className="flex items-center gap-4 sm:gap-5 m-0 p-0">
                         <ThemeToggle/>
-                        {/*<SettingButton onClick={() => setIsSettingsPanelOpen(!isSettingsPanelOpen)}/>*/}
+                        <SettingButton onClick={() => setIsSettingsPanelOpen(!isSettingsPanelOpen)}/>
                     </div>
                 </div>
             </header>
-            {/*<SettingsPanel isOpen={isSettingsPanelOpen} onClose={() => setIsSettingsPanelOpen(false)}/>*/}
+            <SettingsPanel isOpen={isSettingsPanelOpen} onClose={() => setIsSettingsPanelOpen(false)}/>
         </>
     );
 };
