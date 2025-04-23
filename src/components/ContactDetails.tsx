@@ -22,7 +22,7 @@ const ContactDetails = () => {
             <div className="space-y-4">
                 <div className="grid w-full gap-1.5">
                     <div className="space-y-2">
-                        <Label htmlFor="address">Address</Label>
+                        <Label htmlFor="address">Address <span className="text-red-500">*</span></Label>
                         <Textarea
                             id="address"
                             placeholder="123 Main St, City, Country"

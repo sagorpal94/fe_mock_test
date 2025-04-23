@@ -9,6 +9,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle
 } from "./ui/alert-dialog.tsx";
+import {Trash2} from "lucide-react";
 
 interface UserListProps {
     UserData: FormData[]
@@ -43,6 +44,7 @@ const UserList: React.FC<UserListProps> = ({UserData, setUserData}) => {
                                 onClick={handlePopup}
                                 className="px-4 py-2 rounded-md transition-colors cursor-pointer"
                             >
+                                <Trash2 className="w-5 h-5"/>
                                 Clear All User Data
                             </Button>
                         </div>

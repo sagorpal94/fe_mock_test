@@ -13,7 +13,7 @@ const PersonalInfo: React.FC = () => {
 
             <div className="space-y-4">
                 <div className="space-y-2">
-                    <Label htmlFor="name">Full Name</Label>
+                    <Label htmlFor="name">Full Name <span className="text-red-500">*</span></Label>
                     <Input
                         id="name"
                         placeholder="John Doe"

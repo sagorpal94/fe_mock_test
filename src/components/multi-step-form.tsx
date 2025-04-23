@@ -6,7 +6,7 @@ import PersonalInfo from "./PersonalInfo.tsx";
 import ContactDetails from "./ContactDetails.tsx";
 import Preferences from './Preferences.tsx';
 import Review from "./Review.tsx";
-import {CheckIcon} from "lucide-react";
+import {ArrowLeft, ArrowRight, CheckIcon, RotateCcw} from "lucide-react";
 import {Button} from "./ui/button.tsx";
 
 import {
@@ -200,6 +200,7 @@ const MultiStepForm = () => {
                                                     currentStep === 0 ? 'invisible' : ''
                                                 }`}
                                             >
+                                                <ArrowLeft className="w-5 h-5"/>
                                                 Previous
                                             </Button>
 
@@ -211,12 +212,14 @@ const MultiStepForm = () => {
                                                 }`}
                                             >
                                                 Reset Form
+                                                <RotateCcw className="w-5 h-5"/>
                                             </Button>
 
                                             <Button
                                                 className="px-4 py-2 cursor-pointer rounded-md"
                                             >
                                                 {currentStep === steps.length - 1 ? 'Submit' : 'Next'}
+                                                <ArrowRight className="w-5 h-5" />
                                             </Button>
                                         </motion.div>
                                     </AnimatePresence>
