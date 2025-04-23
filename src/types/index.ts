@@ -4,5 +4,8 @@ export interface FormData {
     email: string
     address: string
     phone: string
-    categories: string[]
+    preferences: string[],
+    review: object,
 }
+
+export const steps = ['Personal Info', 'Contact Details', 'Preferences', 'Review'];

@@ -1,13 +1,11 @@
-import { useFormContext } from "react-hook-form"
-import type { FormData } from "../../types"
-import { Input } from "../ui/input"
-import { Label } from "../ui/label"
+import React from 'react';
+import { useFormContext } from 'react-hook-form';
+import { FormData } from '../types';
+import {Label} from "./ui/label.tsx";
+import {Input} from "./ui/input.tsx";
 
-const PersonalInfo = () => {
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext<FormData>()
+const PersonalInfo: React.FC = () => {
+    const { register, formState: { errors } } = useFormContext<FormData>();
     return (
         <div className="space-y-6">
             <h2 className="text-xl font-semibold text-primary">Personal Information</h2>
@@ -34,7 +32,6 @@ const PersonalInfo = () => {
                         type="email"
                         placeholder="john.doe@example.com"
                         {...register("email", {
-                            required: "Email is required",
                             pattern: {
                                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                 message: "Invalid email address",
