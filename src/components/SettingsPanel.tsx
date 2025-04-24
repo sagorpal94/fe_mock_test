@@ -1,8 +1,4 @@
-import {
-    Sheet,
-    SheetContent,
-    SheetHeader, SheetTitle, SheetDescription
-} from "./ui/sheet";
+import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle} from "./ui/sheet";
 import React, {useEffect, useState} from "react";
 import {colorThemes} from "../types";
 import {useTheme} from "../context/theme-provider.tsx";
@@ -182,16 +178,24 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({isOpen, onClose}) => {
                                                             isDark ? colorThemes[theme].dark["--primary"].replace(')', ` / 0.08)`) : colorThemes[theme].light["--primary"].replace(')', ` / 0.08)`)
                                                         }` : 'transparent',
                                                     }}
-                                                    onClick={() => handleColorChange(theme)} // Handle color selection
+                                                    onClick={() => handleColorChange(theme)}
+                                                    onMouseEnter={(e) => {
+                                                        if (selectedColor !== theme) {
+                                                            e.currentTarget.style.backgroundColor = isDark ? colorThemes[theme].dark["--primary"].replace(')', ` / 0.08)`) : colorThemes[theme].light["--primary"].replace(')', ` / 0.08)`);
+                                                        }
+                                                    }}
+                                                    onMouseLeave={(e) => {
+                                                        if (selectedColor !== theme) {
+                                                            e.currentTarget.style.backgroundColor = 'transparent';
+                                                        }
+                                                    }}
                                                     className="inline-flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 shrink-0 h-16 bg-background hover:bg-accent hover:text-accent-foreground h-8 rounded-md px-2 sm:px-3 text-xs"
                                                 >
                                                     <svg
                                                         className="select-none inline-block shrink-0 text-2xl w-7 h-7 transition-[fill] duration-300 ease-in-out"
-                                                        // className={`dark:colorThemes[theme].dark["--primary"]`}
                                                         focusable="false" aria-hidden="true" viewBox="0 0 24 24"
                                                         width="24"
                                                         height="24" fill="none" xmlns="http://www.w3.org/2000/svg"
-
                                                         style={{
                                                             color: `${
                                                                 isDark ? colorThemes[theme].dark["--primary"] : colorThemes[theme].light["--primary"]
