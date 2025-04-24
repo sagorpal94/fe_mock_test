@@ -7,6 +7,7 @@ import React, {useEffect, useState} from "react";
 import {colorThemes} from "../types";
 import {useTheme} from "../context/theme-provider.tsx";
 import {RotateCw} from "lucide-react";
+import SimpleBar from 'simplebar-react';
 
 interface SettingsPanelProps {
     onClose: () => void;
@@ -158,12 +159,13 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({isOpen, onClose}) => {
                     <SheetDescription>
                     </SheetDescription>
                 </SheetHeader>
-                <div className="flex flex-col gap-12 pb-1">
-                    <div className="min-w-0 min-h-0 grow flex flex-col">
-                        <div className="flex flex-col pb-10 gap-12 px-5">
-                            <div className="grid gap-4 py-4">
-                                <div
-                                    className="flex px-4 pt-8 pb-4 relative flex-col gap-5 rounded-2xl border border-input">
+                <SimpleBar style={{maxHeight: 'calc(100vh - 100px)'}}>
+                    <div className="flex flex-col gap-12 pb-1">
+                        <div className="min-w-0 min-h-0 grow flex flex-col">
+                            <div className="flex flex-col pb-10 gap-12 px-5">
+                                <div className="grid gap-4 py-4">
+                                    <div
+                                        className="flex px-4 pt-8 pb-4 relative flex-col gap-5 rounded-2xl border border-input">
                                   <span
                                       className="leading-[22px] absolute items-center inline-flex text-[0.8125rem] font-semibold text-primary-foreground bg-primary px-[10px] rounded-[22px] -top-3">
                                       <RotateCw
@@ -171,143 +173,145 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({isOpen, onClose}) => {
                                           className='cursor-pointer w-[14px] h-[14px] shrink-0 inline-flex  mr-1'/>
                                     Presets
                                   </span>
-                                    <div className="grid gap-3 grid-cols-3">
-                                        {Object.keys(colorThemes).map((theme) => (
-                                            <button
-                                                key={theme}
-                                                style={{
-                                                    backgroundColor: selectedColor === theme ? `${
-                                                        isDark ? colorThemes[theme].dark["--primary"].replace(')', ` / 0.08)`) : colorThemes[theme].light["--primary"].replace(')', ` / 0.08)`)
-                                                    }` : 'transparent',
-                                                }}
-                                                onClick={() => handleColorChange(theme)} // Handle color selection
-                                                className="inline-flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 shrink-0 h-16 bg-background hover:bg-accent hover:text-accent-foreground h-8 rounded-md px-2 sm:px-3 text-xs"
-                                            >
-                                                <svg
-                                                    className="select-none inline-block shrink-0 text-2xl w-7 h-7 transition-[fill] duration-300 ease-in-out"
-                                                    // className={`dark:colorThemes[theme].dark["--primary"]`}
-                                                    focusable="false" aria-hidden="true" viewBox="0 0 24 24" width="24"
-                                                    height="24" fill="none" xmlns="http://www.w3.org/2000/svg"
-
+                                        <div className="grid gap-3 grid-cols-3">
+                                            {Object.keys(colorThemes).map((theme) => (
+                                                <button
+                                                    key={theme}
                                                     style={{
-                                                        color: `${
-                                                            isDark ? colorThemes[theme].dark["--primary"] : colorThemes[theme].light["--primary"]
-                                                        }`,
+                                                        backgroundColor: selectedColor === theme ? `${
+                                                            isDark ? colorThemes[theme].dark["--primary"].replace(')', ` / 0.08)`) : colorThemes[theme].light["--primary"].replace(')', ` / 0.08)`)
+                                                        }` : 'transparent',
                                                     }}
+                                                    onClick={() => handleColorChange(theme)} // Handle color selection
+                                                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 shrink-0 h-16 bg-background hover:bg-accent hover:text-accent-foreground h-8 rounded-md px-2 sm:px-3 text-xs"
                                                 >
-                                                    <path opacity="0.4" fillRule="evenodd" clipRule="evenodd"
-                                                          d="M20.828 4.172C22 5.343 22 7.229 22 11V13C22 16.771 22 18.657 20.828 19.828C19.657 21 17.771 21 14 21H9V3H14C17.771 3 19.657 3 20.828 4.172Z"
-                                                          fill="currentColor"></path>
-                                                    <path
-                                                        d="M18.5 9.244C18.6989 9.244 18.8897 9.32302 19.0303 9.46367C19.171 9.60432 19.25 9.79509 19.25 9.994C19.25 10.1929 19.171 10.3837 19.0303 10.5243C18.8897 10.665 18.6989 10.744 18.5 10.744H12.5C12.3011 10.744 12.1103 10.665 11.9697 10.5243C11.829 10.3837 11.75 10.1929 11.75 9.994C11.75 9.79509 11.829 9.60432 11.9697 9.46367C12.1103 9.32302 12.3011 9.244 12.5 9.244H18.5ZM17.5 13.244C17.6989 13.244 17.8897 13.323 18.0303 13.4637C18.171 13.6043 18.25 13.7951 18.25 13.994C18.25 14.1929 18.171 14.3837 18.0303 14.5243C17.8897 14.665 17.6989 14.744 17.5 14.744H13.5C13.3011 14.744 13.1103 14.665 12.9697 14.5243C12.829 14.3837 12.75 14.1929 12.75 13.994C12.75 13.7951 12.829 13.6043 12.9697 13.4637C13.1103 13.323 13.3011 13.244 13.5 13.244H17.5ZM2 12.994V10.994C2 7.223 2 5.337 3.172 4.166C4.146 3.191 6.364 3.027 9 3V20.988C6.364 20.961 4.146 20.797 3.172 19.822C2 18.651 2 16.765 2 12.994Z"
-                                                        fill="currentColor"></path>
-                                                </svg>
+                                                    <svg
+                                                        className="select-none inline-block shrink-0 text-2xl w-7 h-7 transition-[fill] duration-300 ease-in-out"
+                                                        // className={`dark:colorThemes[theme].dark["--primary"]`}
+                                                        focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                                                        width="24"
+                                                        height="24" fill="none" xmlns="http://www.w3.org/2000/svg"
 
-                                            </button>
-                                        ))}
+                                                        style={{
+                                                            color: `${
+                                                                isDark ? colorThemes[theme].dark["--primary"] : colorThemes[theme].light["--primary"]
+                                                            }`,
+                                                        }}
+                                                    >
+                                                        <path opacity="0.4" fillRule="evenodd" clipRule="evenodd"
+                                                              d="M20.828 4.172C22 5.343 22 7.229 22 11V13C22 16.771 22 18.657 20.828 19.828C19.657 21 17.771 21 14 21H9V3H14C17.771 3 19.657 3 20.828 4.172Z"
+                                                              fill="currentColor"></path>
+                                                        <path
+                                                            d="M18.5 9.244C18.6989 9.244 18.8897 9.32302 19.0303 9.46367C19.171 9.60432 19.25 9.79509 19.25 9.994C19.25 10.1929 19.171 10.3837 19.0303 10.5243C18.8897 10.665 18.6989 10.744 18.5 10.744H12.5C12.3011 10.744 12.1103 10.665 11.9697 10.5243C11.829 10.3837 11.75 10.1929 11.75 9.994C11.75 9.79509 11.829 9.60432 11.9697 9.46367C12.1103 9.32302 12.3011 9.244 12.5 9.244H18.5ZM17.5 13.244C17.6989 13.244 17.8897 13.323 18.0303 13.4637C18.171 13.6043 18.25 13.7951 18.25 13.994C18.25 14.1929 18.171 14.3837 18.0303 14.5243C17.8897 14.665 17.6989 14.744 17.5 14.744H13.5C13.3011 14.744 13.1103 14.665 12.9697 14.5243C12.829 14.3837 12.75 14.1929 12.75 13.994C12.75 13.7951 12.829 13.6043 12.9697 13.4637C13.1103 13.323 13.3011 13.244 13.5 13.244H17.5ZM2 12.994V10.994C2 7.223 2 5.337 3.172 4.166C4.146 3.191 6.364 3.027 9 3V20.988C6.364 20.961 4.146 20.797 3.172 19.822C2 18.651 2 16.765 2 12.994Z"
+                                                            fill="currentColor"></path>
+                                                    </svg>
+
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div
-                                className="flex px-4 pt-8 pb-4 relative flex-col gap-5 rounded-2xl border border-input">
+                                <div
+                                    className="flex px-4 pt-8 pb-4 relative flex-col gap-5 rounded-2xl border border-input">
                                   <span
                                       className="leading-[22px] absolute items-center inline-flex text-[0.8125rem] font-semibold text-primary-foreground bg-primary px-12 rounded-[22px] -top-3">
                                     Font
                                   </span>
-                                <div className="flex flex-col gap-5">
-                                    <button
-                                        className="cursor-pointer hover:text-primary inline-flex items-center justify-center relative box-border select-none align-middle appearance-none leading-4 self-start text-[0.6875rem] font-semibold no-underline gap-[2px] transition-[color] duration-300 ease-in-out m-0 p-0 rounded-none border-0">
-                                        <RotateCw
-                                            onClick={resetFont}
-                                            className='w-[14px] h-[14px] shrink-0 inline-flex opacity-[0.64] mr-1'/>
-                                        Family
-                                    </button>
-                                    <div className="grid gap-3 grid-cols-2">
-                                        {fonts.map((font) => (
-                                            <button
-                                                key={font}
-                                                onClick={() => onFontChange(font)}
-                                                className={`inline-flex items-center justify-center relative box-border cursor-pointer align-middle appearance-none no-underline w-full leading-[18px] card-background gap-1.5 flex-col m-0 px-0 py-4 rounded-[10px] transition-all duration-300 ease-in-out border hover:card-background/10 hover:border-primary/50 hover:scale-[1.04] transform-gpu origin-center
+                                    <div className="flex flex-col gap-5">
+                                        <button
+                                            className="cursor-pointer hover:text-primary inline-flex items-center justify-center relative box-border select-none align-middle appearance-none leading-4 self-start text-[0.6875rem] font-semibold no-underline gap-[2px] transition-[color] duration-300 ease-in-out m-0 p-0 rounded-none border-0">
+                                            <RotateCw
+                                                onClick={resetFont}
+                                                className='w-[14px] h-[14px] shrink-0 inline-flex opacity-[0.64] mr-1'/>
+                                            Family
+                                        </button>
+                                        <div className="grid gap-3 grid-cols-2">
+                                            {fonts.map((font) => (
+                                                <button
+                                                    key={font}
+                                                    onClick={() => onFontChange(font)}
+                                                    className={`inline-flex items-center justify-center relative box-border cursor-pointer align-middle appearance-none no-underline w-full leading-[18px] card-background gap-1.5 flex-col m-0 px-0 py-4 rounded-[10px] transition-all duration-300 ease-in-out border hover:card-background/10 hover:border-primary/50 hover:scale-[1.04] transform-gpu origin-center
                                                             ${selectedFont === font ? "shadow-lg font-bold border-primary text-base text-primary" : "shadow-none font-normal border-input text-xs"}
                                                           `}
-                                                style={{
-                                                    fontFamily: selectedFont === font ? font : "inherit",
-                                                }}
-                                            >
-                                                <svg
-                                                    className="shrink-0 inline-flex w-7 h-7 text-[current]"
-                                                    focusable="false" aria-hidden="true" viewBox="0 0 24 24"
-                                                    width="24" height="24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path opacity="0.4"
-                                                          d="M17.1229 18.16C16.5754 18.16 16.0833 18.0577 15.6464 17.8531C15.2096 17.6485 14.864 17.3526 14.6096 16.9656C14.3552 16.5729 14.228 16.0974 14.228 15.5389C14.228 14.5988 14.5792 13.8855 15.2814 13.3989C15.9837 12.9067 17.0924 12.6523 18.6076 12.6357L19.6776 12.6192V12.1049C19.6776 11.7123 19.5615 11.4109 19.3292 11.2008C19.1025 10.9851 18.7486 10.88 18.2675 10.8856C17.9136 10.8911 17.5763 10.974 17.2556 11.1344C16.9404 11.2948 16.7247 11.574 16.6086 11.9722H14.593C14.6262 11.3528 14.8059 10.8441 15.1321 10.446C15.4584 10.0423 15.9008 9.74368 16.4593 9.55013C17.0233 9.35106 17.662 9.25153 18.3754 9.25153C19.2546 9.25153 19.9596 9.36212 20.4905 9.58331C21.0214 9.79897 21.4057 10.1114 21.6435 10.5206C21.8812 10.9243 22.0001 11.4054 22.0001 11.9639V17.9941H19.9762L19.7772 16.5176C19.4841 17.137 19.1163 17.5655 18.674 17.8033C18.2371 18.0411 17.7201 18.16 17.1229 18.16ZM17.9357 16.5674C18.1569 16.5674 18.3698 16.5287 18.5744 16.4513C18.7846 16.3683 18.9698 16.2605 19.1302 16.1278C19.2961 15.9896 19.4288 15.8347 19.5283 15.6633C19.6278 15.4919 19.6776 15.3149 19.6776 15.1324V13.8634L18.8067 13.8799C18.403 13.8855 18.027 13.9352 17.6786 14.0292C17.3302 14.1177 17.0482 14.2643 16.8326 14.4689C16.6224 14.6735 16.5174 14.95 16.5174 15.2983C16.5174 15.6965 16.6556 16.0089 16.9321 16.2356C17.2086 16.4568 17.5431 16.5674 17.9357 16.5674Z"
-                                                          fill="currentColor"></path>
-                                                    <path
-                                                        d="M2 17.9941L6.29663 6H8.85139L13.1397 17.9941H10.726L9.74721 15.2154H5.43399L4.43033 17.9941H2ZM5.97314 13.1002H9.16658L7.5823 8.33909L5.97314 13.1002Z"
-                                                        fill="currentColor"></path>
-                                                </svg>
+                                                    style={{
+                                                        fontFamily: selectedFont === font ? font : "inherit",
+                                                    }}
+                                                >
+                                                    <svg
+                                                        className="shrink-0 inline-flex w-7 h-7 text-[current]"
+                                                        focusable="false" aria-hidden="true" viewBox="0 0 24 24"
+                                                        width="24" height="24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path opacity="0.4"
+                                                              d="M17.1229 18.16C16.5754 18.16 16.0833 18.0577 15.6464 17.8531C15.2096 17.6485 14.864 17.3526 14.6096 16.9656C14.3552 16.5729 14.228 16.0974 14.228 15.5389C14.228 14.5988 14.5792 13.8855 15.2814 13.3989C15.9837 12.9067 17.0924 12.6523 18.6076 12.6357L19.6776 12.6192V12.1049C19.6776 11.7123 19.5615 11.4109 19.3292 11.2008C19.1025 10.9851 18.7486 10.88 18.2675 10.8856C17.9136 10.8911 17.5763 10.974 17.2556 11.1344C16.9404 11.2948 16.7247 11.574 16.6086 11.9722H14.593C14.6262 11.3528 14.8059 10.8441 15.1321 10.446C15.4584 10.0423 15.9008 9.74368 16.4593 9.55013C17.0233 9.35106 17.662 9.25153 18.3754 9.25153C19.2546 9.25153 19.9596 9.36212 20.4905 9.58331C21.0214 9.79897 21.4057 10.1114 21.6435 10.5206C21.8812 10.9243 22.0001 11.4054 22.0001 11.9639V17.9941H19.9762L19.7772 16.5176C19.4841 17.137 19.1163 17.5655 18.674 17.8033C18.2371 18.0411 17.7201 18.16 17.1229 18.16ZM17.9357 16.5674C18.1569 16.5674 18.3698 16.5287 18.5744 16.4513C18.7846 16.3683 18.9698 16.2605 19.1302 16.1278C19.2961 15.9896 19.4288 15.8347 19.5283 15.6633C19.6278 15.4919 19.6776 15.3149 19.6776 15.1324V13.8634L18.8067 13.8799C18.403 13.8855 18.027 13.9352 17.6786 14.0292C17.3302 14.1177 17.0482 14.2643 16.8326 14.4689C16.6224 14.6735 16.5174 14.95 16.5174 15.2983C16.5174 15.6965 16.6556 16.0089 16.9321 16.2356C17.2086 16.4568 17.5431 16.5674 17.9357 16.5674Z"
+                                                              fill="currentColor"></path>
+                                                        <path
+                                                            d="M2 17.9941L6.29663 6H8.85139L13.1397 17.9941H10.726L9.74721 15.2154H5.43399L4.43033 17.9941H2ZM5.97314 13.1002H9.16658L7.5823 8.33909L5.97314 13.1002Z"
+                                                            fill="currentColor"></path>
+                                                    </svg>
 
 
-                                                {font}
-                                            </button>
-                                        ))}
+                                                    {font}
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
+
+
+                                    {/*<div*/}
+                                    {/*    className={`flex flex-col items-start gap-10 rounded-xl`}>*/}
+                                    {/*    <button*/}
+                                    {/*        onClick={() => setFontSize(defaultSize)}*/}
+                                    {/*        className="inline-flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"*/}
+                                    {/*    >*/}
+                                    {/*        <RotateCw className="w-3.5 h-3.5"/>*/}
+                                    {/*        <span className="text-xs font-bold ">Size</span>*/}
+                                    {/*    </button>*/}
+
+                                    {/*    <div className="relative w-full h-10">*/}
+                                    {/*        <div*/}
+                                    {/*            className="absolute w-full h-2 bg-gray-100 dark:bg-gray-700 rounded-xl top-1/2 -translate-y-1/2"></div>*/}
+                                    {/*        <div*/}
+                                    {/*            className="absolute h-2 rounded-xl top-1/2 -translate-y-1/2 bg-gradient-to-r from-emerald-400 to-emerald-600"*/}
+                                    {/*            style={{width: `${calculatePercentage()}%`, left: 0}}*/}
+                                    {/*        ></div>*/}
+                                    {/*        {ticks.map((tick, index) => (*/}
+                                    {/*            <div*/}
+                                    {/*                key={index}*/}
+                                    {/*                className=" absolute w-0.5 h-1 bg-gray-300 dark:bg-gray-600 top-1/2 -translate-y-1/2"*/}
+                                    {/*                style={{left: `${tick}%`}}*/}
+                                    {/*            ></div>*/}
+                                    {/*        ))}*/}
+                                    {/*        <div className="absolute top-1/2 -translate-y-1/2"*/}
+                                    {/*             style={{left: `${calculatePercentage()}%`}}>*/}
+                                    {/*            <div className="relative">*/}
+                                    {/*                <div*/}
+                                    {/*                    className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 dark:bg-gray-700 text-white text-xs py-1 px-2 rounded">*/}
+                                    {/*                    {fontSize}px*/}
+                                    {/*                </div>*/}
+                                    {/*                <div*/}
+                                    {/*                    className="font-shadow w-4 h-4 bg-white dark:bg-gray-200 rounded-full shadow-md border border-gray-200 dark:border-gray-600 -translate-x-1/2"></div>*/}
+                                    {/*            </div>*/}
+                                    {/*        </div>*/}
+                                    {/*        <input*/}
+                                    {/*            type="range"*/}
+                                    {/*            min={minValue}*/}
+                                    {/*            max={maxValue}*/}
+                                    {/*            step={step}*/}
+                                    {/*            value={fontSize}*/}
+                                    {/*            onChange={(e) => setFontSize(Number(e.target.value))}*/}
+                                    {/*            className="absolute w-full h-2 opacity-0 cursor-pointer top-1/2 -translate-y-1/2"*/}
+                                    {/*        />*/}
+                                    {/*    </div>*/}
+                                    {/*</div>*/}
+
                                 </div>
 
-
-                                {/*<div*/}
-                                {/*    className={`flex flex-col items-start gap-10 rounded-xl`}>*/}
-                                {/*    <button*/}
-                                {/*        onClick={() => setFontSize(defaultSize)}*/}
-                                {/*        className="inline-flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"*/}
-                                {/*    >*/}
-                                {/*        <RotateCw className="w-3.5 h-3.5"/>*/}
-                                {/*        <span className="text-xs font-bold ">Size</span>*/}
-                                {/*    </button>*/}
-
-                                {/*    <div className="relative w-full h-10">*/}
-                                {/*        <div*/}
-                                {/*            className="absolute w-full h-2 bg-gray-100 dark:bg-gray-700 rounded-xl top-1/2 -translate-y-1/2"></div>*/}
-                                {/*        <div*/}
-                                {/*            className="absolute h-2 rounded-xl top-1/2 -translate-y-1/2 bg-gradient-to-r from-emerald-400 to-emerald-600"*/}
-                                {/*            style={{width: `${calculatePercentage()}%`, left: 0}}*/}
-                                {/*        ></div>*/}
-                                {/*        {ticks.map((tick, index) => (*/}
-                                {/*            <div*/}
-                                {/*                key={index}*/}
-                                {/*                className=" absolute w-0.5 h-1 bg-gray-300 dark:bg-gray-600 top-1/2 -translate-y-1/2"*/}
-                                {/*                style={{left: `${tick}%`}}*/}
-                                {/*            ></div>*/}
-                                {/*        ))}*/}
-                                {/*        <div className="absolute top-1/2 -translate-y-1/2"*/}
-                                {/*             style={{left: `${calculatePercentage()}%`}}>*/}
-                                {/*            <div className="relative">*/}
-                                {/*                <div*/}
-                                {/*                    className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 dark:bg-gray-700 text-white text-xs py-1 px-2 rounded">*/}
-                                {/*                    {fontSize}px*/}
-                                {/*                </div>*/}
-                                {/*                <div*/}
-                                {/*                    className="font-shadow w-4 h-4 bg-white dark:bg-gray-200 rounded-full shadow-md border border-gray-200 dark:border-gray-600 -translate-x-1/2"></div>*/}
-                                {/*            </div>*/}
-                                {/*        </div>*/}
-                                {/*        <input*/}
-                                {/*            type="range"*/}
-                                {/*            min={minValue}*/}
-                                {/*            max={maxValue}*/}
-                                {/*            step={step}*/}
-                                {/*            value={fontSize}*/}
-                                {/*            onChange={(e) => setFontSize(Number(e.target.value))}*/}
-                                {/*            className="absolute w-full h-2 opacity-0 cursor-pointer top-1/2 -translate-y-1/2"*/}
-                                {/*        />*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
-
                             </div>
-
                         </div>
                     </div>
-                </div>
+                </SimpleBar>
             </SheetContent>
         </Sheet>
     );
