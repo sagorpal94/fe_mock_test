@@ -182,20 +182,19 @@ const MultiStepForm = () => {
                                     </motion.div>
                                 </AnimatePresence>
 
-                                <div className="mt-8 flex justify-between w-full gap-5">
-                                    <AnimatePresence mode="wait">
+                                <AnimatePresence mode="wait">
                                         <motion.div
                                             key={currentStep}
                                             initial={{opacity: 0, x: 20}}
                                             animate={{opacity: 1, x: 0}}
                                             exit={{opacity: 0, x: -20}}
                                             transition={{duration: 0.2}}
-                                            className="flex flex-col flex-col-reverse sm:flex-row justify-between w-full gap-5"
+                                            className={`mt-8 w-full flex flex-col flex-col-reverse sm:flex-row items-center w-full gap-5 ${currentStep === 0 ? 'justify-end' : 'justify-between'}`}
                                         >
                                             <Button
                                                 type="button"
                                                 onClick={() => setCurrentStep(prev => prev - 1)}
-                                                className={`px-4 py-2 cursor-pointer  rounded-md ${
+                                                className={`px-4 py-2 cursor-pointer w-full sm:w-auto rounded-md ${
                                                     currentStep === 0 ? 'hidden' : ''
                                                 }`}
                                             >
@@ -206,7 +205,7 @@ const MultiStepForm = () => {
                                             <Button
                                                 type="button"
                                                 onClick={handleReset}
-                                                className={`px-4 py-2 cursor-pointer rounded-md ${
+                                                className={`px-4 py-2 cursor-pointer w-full sm:w-auto rounded-md ${
                                                     currentStep === 0 ? 'hidden' : ''
                                                 }`}
                                             >
@@ -215,14 +214,14 @@ const MultiStepForm = () => {
                                             </Button>
 
                                             <Button
-                                                className="px-4 py-2 cursor-pointer rounded-md"
+                                                className="px-4 py-2 cursor-pointer rounded-md w-full sm:w-auto"
                                             >
                                                 {currentStep === steps.length - 1 ? 'Submit' : 'Next'}
                                                 <ArrowRight className="w-5 h-5"/>
                                             </Button>
                                         </motion.div>
                                     </AnimatePresence>
-                                </div>
+
                             </form>
                         </FormProvider>
                     </div>
@@ -243,8 +242,8 @@ const MultiStepForm = () => {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={methods.handleSubmit(onSubmit)}>Ok</AlertDialogAction>
+                        <AlertDialogCancel className="cursor-pointer">Cancel</AlertDialogCancel>
+                        <AlertDialogAction className="cursor-pointer" onClick={methods.handleSubmit(onSubmit)}>Ok</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -259,8 +258,8 @@ const MultiStepForm = () => {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={confirmReset}>Ok</AlertDialogAction>
+                        <AlertDialogCancel className="cursor-pointer">Cancel</AlertDialogCancel>
+                        <AlertDialogAction className="cursor-pointer" onClick={confirmReset}>Ok</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

@@ -115,8 +115,8 @@ const UserList: React.FC<UserListProps> = ({UserData, setUserData}) => {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={handleClearUserData}>Ok</AlertDialogAction>
+                        <AlertDialogCancel className="cursor-pointer">Cancel</AlertDialogCancel>
+                        <AlertDialogAction className="cursor-pointer" onClick={handleClearUserData}>Ok</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
