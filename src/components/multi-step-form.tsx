@@ -122,7 +122,7 @@ const MultiStepForm = () => {
     return (
         <>
             <Card className="shadow-lg border-0 pb-0">
-                <CardContent className="p-6">
+                <CardContent className="p-3">
                     <div className="mx-auto p-6">
                         <div className="mb-8">
                             <div className="flex flex-col gap-10 sm:gap-0 sm:flex-row justify-between items-center">
@@ -190,14 +190,13 @@ const MultiStepForm = () => {
                                             animate={{opacity: 1, x: 0}}
                                             exit={{opacity: 0, x: -20}}
                                             transition={{duration: 0.2}}
-
-                                            className="mt-8 flex justify-between w-full gap-5"
+                                            className="flex flex-col flex-col-reverse sm:flex-row justify-between w-full gap-5"
                                         >
                                             <Button
                                                 type="button"
                                                 onClick={() => setCurrentStep(prev => prev - 1)}
                                                 className={`px-4 py-2 cursor-pointer  rounded-md ${
-                                                    currentStep === 0 ? 'invisible' : ''
+                                                    currentStep === 0 ? 'hidden' : ''
                                                 }`}
                                             >
                                                 <ArrowLeft className="w-5 h-5"/>
@@ -208,7 +207,7 @@ const MultiStepForm = () => {
                                                 type="button"
                                                 onClick={handleReset}
                                                 className={`px-4 py-2 cursor-pointer rounded-md ${
-                                                    currentStep === 0 ? 'invisible' : ''
+                                                    currentStep === 0 ? 'hidden' : ''
                                                 }`}
                                             >
                                                 Reset Form
@@ -219,7 +218,7 @@ const MultiStepForm = () => {
                                                 className="px-4 py-2 cursor-pointer rounded-md"
                                             >
                                                 {currentStep === steps.length - 1 ? 'Submit' : 'Next'}
-                                                <ArrowRight className="w-5 h-5" />
+                                                <ArrowRight className="w-5 h-5"/>
                                             </Button>
                                         </motion.div>
                                     </AnimatePresence>
