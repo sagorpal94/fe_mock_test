@@ -159,7 +159,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({isOpen, onClose}) => {
                     <SheetDescription>
                     </SheetDescription>
                 </SheetHeader>
-                <SimpleBar style={{maxHeight: 'calc(100vh - 100px)'}}>
+                <SimpleBar style={{maxHeight: 'calc(100vh - 100px)'}} autoHide={true} forceVisible="y">
                     <div className="flex flex-col gap-12 pb-1">
                         <div className="min-w-0 min-h-0 grow flex flex-col">
                             <div className="flex flex-col pb-10 gap-12 px-5">
