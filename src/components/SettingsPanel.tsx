@@ -36,7 +36,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({isOpen, onClose}) => {
     const onFontChange = (font: string) => {
         setSelectedFont(font);
         localStorage.setItem("selectedFont", font);
-        (document.body as HTMLElement).style.fontFamily = font;
+        document.body.style.fontFamily = font;
     };
 
     const resetFont = () => {
@@ -69,6 +69,14 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({isOpen, onClose}) => {
             });
         }
     }
+
+    useEffect(() => {
+        const font = localStorage.getItem("selectedFont");
+        if (font) {
+            setSelectedFont(font);
+            document.body.style.fontFamily = font;
+        }
+    }, []);
 
     useEffect(() => {
         const savedTheme = localStorage.getItem("selectedThemeColor");
