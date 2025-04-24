@@ -120,6 +120,9 @@ const MultiStepForm = () => {
             methods.setValue("phone", "")
             methods.setValue("preferences", [])
             setShowResetDialog(false);
+            toast.success('Form reset successful!', {
+                description: 'All fields have been cleared.',
+            });
         }
     }
 
