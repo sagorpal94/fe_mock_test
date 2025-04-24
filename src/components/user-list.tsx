@@ -10,6 +10,7 @@ import {
     AlertDialogTitle
 } from "./ui/alert-dialog.tsx";
 import {Trash2} from "lucide-react";
+import {toast} from "sonner";
 
 interface UserListProps {
     UserData: FormData[]
@@ -24,6 +25,9 @@ const UserList: React.FC<UserListProps> = ({UserData, setUserData}) => {
             setUserData([]);
             localStorage.removeItem('UserData');
             setShowDeleteDialog(false)
+            toast.success('User information was successfully deleted!',{
+                description: "All associated user data has been permanently removed from the system."
+            })
         }
     };
 

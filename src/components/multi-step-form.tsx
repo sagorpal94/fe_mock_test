@@ -21,6 +21,7 @@ import {
 } from "./ui/alert-dialog"
 import UserList from "./user-list.tsx";
 import {Card, CardContent} from "./ui/card.tsx";
+import {toast} from "sonner";
 
 const MultiStepForm = () => {
     const [currentStep, setCurrentStep] = useState(() => {
@@ -77,6 +78,9 @@ const MultiStepForm = () => {
             methods.setValue("phone", "")
             methods.setValue("preferences", [])
             setShowConfirmDialog(false)
+            toast.success('User information was successfully created!',{
+                description: "The system has successfully stored the new user details."
+            })
         } else {
             localStorage.setItem('formData', JSON.stringify(data));
             setCurrentStep(prev => prev + 1);

@@ -1,6 +1,7 @@
 import {ThemeProvider} from "./context/theme-provider.tsx";
 import Navbar from "./components/Navbar.tsx";
 import MultiStepForm from "./components/multi-step-form.tsx";
+import {Toaster} from "./components/ui/sonner.tsx";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
                         <MultiStepForm/>
                     </div>
                 </main>
+                <Toaster richColors position="top-right"/>
             </ThemeProvider>
         </div>
     )
